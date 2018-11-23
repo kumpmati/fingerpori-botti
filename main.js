@@ -43,7 +43,7 @@ function check() {
     //send the new comic to all the clients
     if (data.status == 1 && data.data != comic.data) {
       comic = data;
-      console.log(`${new Date().toLocaleString()}: uusi FINGERPORI löydetty`);
+      console.log(`${new Date().toLocaleString()}: UUSI FINGERPORI LÖYDETTY`);
       //broadcast to all connected clients
       wss.clients.forEach(function each(ws) {
         if (ws.readyState === WebSocket.OPEN) {
