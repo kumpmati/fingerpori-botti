@@ -4,6 +4,7 @@ const express = require("express");
 let app = express();
 let comic = { status: 0, data: 0, date: 0 };
 let url = "https://www.kaleva.fi/fingerpori/";
+let refresh_interval = 1000 * 60 * 60 * 12;
 
 app.use(express.static("html"));
 
@@ -11,6 +12,7 @@ app.listen(80, () => console.log("express: 80"));
 
 const wss = new WebSocket.Server({ port: 8080 }, () => {
   console.log("ws: 8080");
+  check();
 });
 
 wss.on("connection", ws => {
@@ -33,11 +35,12 @@ wss.on("connection", ws => {
 });
 
 //check for new comic every 60 seconds
-setInterval(check, 1000 * 60 * 60 * 12);
+setInterval(check, refresh_interval);
 
 function check() {
   //fetch latest comic
-  requester.getComic("https://www.kaleva.fi/fingerpori/", data => {
+  console.log(`${new Date().toLocaleString()}: päivitetään...`);
+  requester.getComic(url, data => {
     //if fetching comic was successful and the comic
     //is different to the previous one
     //send the new comic to all the clients
@@ -54,5 +57,3 @@ function check() {
     }
   });
 }
-
-check();
