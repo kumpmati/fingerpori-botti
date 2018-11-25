@@ -3,7 +3,7 @@ const WebSocket = require("ws");
 const express = require("express");
 let app = express();
 let comic = { status: 0, data: 0, date: 0 };
-let url = "https://www.kaleva.fi/fingerpori/";
+let url = "https://www.ess.fi/sarjakuvat/fingerpori/";
 let refresh_interval = 1000 * 60 * 60 * 12;
 
 app.use(express.static("html"));

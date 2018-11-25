@@ -2,6 +2,8 @@
 const https = require("https");
 //used to parse html data
 const cheerio = require("cheerio");
+const img_element =
+  "#sarjis-lataalisaa article:nth-of-type(1) .image-wrapper a img";
 
 class Requester {
   constructor() {}
@@ -18,7 +20,7 @@ class Requester {
           //return the comic url
           ret = {
             status: 1,
-            data: $("img[class=comics__strip__image]")[0].attribs.src,
+            data: $(img_element)[0].attribs.src,
             date: new Date().toLocaleDateString()
           };
         } catch (e) {
