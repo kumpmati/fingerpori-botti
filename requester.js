@@ -2,37 +2,43 @@
 const https = require("https");
 //used to parse html data
 const cheerio = require("cheerio");
-const img_element =
-  "#sarjis-lataalisaa article:nth-of-type(1) .image-wrapper a img";
 
 class Requester {
   constructor() {}
 
-  getComic(url, callback) {
-    https.get(url, res => {
-      let rawData = "";
-      let ret = { status: 0, data: "" };
-      res.on("data", chunk => (rawData += chunk.toString()));
-      res.on("end", () => {
-        //load html to be parsed
-        const $ = cheerio.load(rawData);
+  getComic(pageObject, callback) {
+    var htmlBody = "";
+    //GET the html page
+    https.get(pageObject.url, d => {
+      d.on("data", chunk => (htmlBody += chunk.toString()));
+      //when page is fully received
+      d.on("end", () => {
+        //parse page using cheerio
+        const $ = cheerio.load(htmlBody);
+
+        //try getting the image element
+
         try {
-          //return the comic url
-          ret = {
-            status: 1,
-            data: $(img_element)[0].attribs.src,
-            date: new Date().toLocaleDateString()
-          };
+          let img;
+          if (pageObject.hasOwnProperty("attrib")) {
+            img = $(pageObject.element)[0].getAttribute(pageObject.attrib);
+            console.log("hello" + img);
+          } else {
+            img = $(pageObject.element)[0].attribs.src;
+          }
+          let d = new Date().toLocaleDateString();
+          callback({
+            page: pageObject.page,
+            date: d,
+            data: img,
+            panelId: pageObject.panelId
+          });
         } catch (e) {
-          //error happened while parsing html
-          ret = { status: 0, data: e.message };
+          callback({
+            page: pageObject.page,
+            error: e.message.toString()
+          });
         }
-        callback(ret);
-      });
-      //
-      res.on("error", e => {
-        //error happened while sending request
-        callback({ status: -1, data: e.message });
       });
     });
   }
