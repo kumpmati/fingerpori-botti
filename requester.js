@@ -17,7 +17,6 @@ class Requester {
         const $ = cheerio.load(htmlBody);
 
         //try getting the image element
-
         try {
           let img;
           if (pageObject.hasOwnProperty("attrib")) {

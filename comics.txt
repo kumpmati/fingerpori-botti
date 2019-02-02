@@ -1,0 +1,60 @@
+[
+
+{
+
+
+"page": "Aamulehti",
+
+
+"error": "Cannot read property 'attribs' of undefined"
+
+},
+
+{
+
+
+"page": "Iltalehti",
+
+
+"date": "2019-2-2",
+
+
+"data": "https://assets.ilcdn.fi/879317dd12425a09656d61b49c8b88b98f3139a49c7dd8e74c042d245b144b42.gif",
+
+
+"panelId": 2
+
+},
+
+{
+
+
+"page": "Etelä-Suomen Sanomat",
+
+
+"date": "2019-2-2",
+
+
+"data": "https://www.ess.fi/incoming/img2517082/vaajct/ALTERNATES/w980/2049798.jpg",
+
+
+"panelId": 0
+
+},
+
+{
+
+
+"page": "Kaleva",
+
+
+"date": "2019-2-2",
+
+
+"data": "https://crop.kaleva.fi/cUQTScdQTA1HUCORlM63lf6d47o=/smart/http%3A//kuvat.kaleva.fi/cartoons/9faf68c392124741a13f4ae1f5e2b9c3.jpg",
+
+
+"panelId": 1
+
+}
+]
