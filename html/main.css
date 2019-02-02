@@ -26,6 +26,7 @@ body {
 }
 
 .comic_panel_container {
+  min-width: 400px;
   float: left;
   width: 33.3%;
   opacity: 0;
